@@ -22,11 +22,11 @@ describe('LESS Parser', () => {
         expect(root.first.first.name).to.eql('media');
     });
 
-    // it('parses variables', () => {
-    //     let root = parse('$var: 1;');
-    //     expect(root.first.prop).to.eql('$var');
-    //     expect(root.first.value).to.eql('1');
-    // });
+    it('parses variables', () => {
+        let root = parse('@var: #fff;');
+        expect(root.first.name).to.eql('var:');
+        expect(root.first.params).to.eql('#fff');
+    });
 
     it('parses inline comments', () => {
         let root = parse('\n// a \n/* b */');
@@ -91,15 +91,16 @@ describe('LESS Parser', () => {
     });
 
     it('parses mixins', () => {
-        let root = parse('.foo (@baz) { border: @{baz}; }');
+        let root = parse('.foo (@bar; @baz...) { border: @{baz}; }');
 
         expect(root.first.type).to.eql('mixin');
-        expect(root.first.selector).to.eql('.foo (@baz)');
+        expect(root.first.selector).to.eql('.foo (@bar; @baz...)');
+        expect(root.first.params[0].name).to.eql('bar');
         expect(root.first.first.prop).to.eql('border');
         expect(root.first.first.value).to.eql('@{baz}');
     });
 
     /* eslint no-warning-comments: 0 */
-    // TODO: mixin parameters
+    // TODO: mixin parameter default values, mixin calls
 
 });

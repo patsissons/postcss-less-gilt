@@ -116,8 +116,16 @@ export default function lessTokenize(input) {
             } else {
                 next    = css.indexOf(')', pos + 1);
                 content = css.slice(pos, next + 1);
+                let badBracket = RE_BAD_BRACKET.test(content);
+                let foundParam = content.indexOf('@') >= 0;
 
-                if ( next === -1 || RE_BAD_BRACKET.test(content) ) {
+                if (!content.length || content === '...' || foundParam) {
+                    // we're dealing with a mixin param block
+                    if ( next === -1 || badBracket ) {
+                        unclosed('bracket');
+                    }
+                    tokens.push(['(', '(', line, pos - offset]);
+                } else if ( next === -1 || badBracket ) {
                     tokens.push(['(', '(', line, pos - offset]);
                 } else {
                     tokens.push(['brackets', content,
@@ -208,17 +216,33 @@ export default function lessTokenize(input) {
                     line   = nextLine;
                     pos    = next;
                 } else {
+                    // let prevToken = tokens[tokens.length - 1];
+                    let nParenStart = tokens.findIndex(t => t[0] === '(');
+                    let nParenEnd = tokens.findIndex(t => t[0] === ')');
+                    let isMixinParam = nParenStart >= 0 && nParenEnd < 0;
+
                     RE_AT_END.lastIndex = pos + 1;
                     RE_AT_END.test(css);
+
                     if ( RE_AT_END.lastIndex === 0 ) {
                         next = css.length - 1;
                     } else {
                         next = RE_AT_END.lastIndex - 2;
                     }
-                    tokens.push(['at-word', css.slice(pos, next + 1),
+
+                    content = css.slice(pos, next + 1);
+
+                    tokens.push([isMixinParam ? 'mixin-param' : 'at-word',
+                        content,
                         line, pos  - offset,
                         line, next - offset
                     ]);
+
+                    if (isMixinParam && content.indexOf('...') + 3 === content.length) {
+                        // we're dealing with a variable list
+                        tokens[tokens.length - 1].push('var-dict');
+                    }
+
                     pos = next;
                     break;
                 }
