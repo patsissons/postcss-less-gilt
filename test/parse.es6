@@ -72,7 +72,7 @@ describe('LESS Parser', () => {
     });
 
     it('parses mixin interpolation', () => {
-        let less = '.browser-prefix(@prop, @args) {\n  -webkit-@{prop}: @args;\n}';
+        let less = '.browser-prefix(@prop, @args) {\n @{prop}: @args;\n}';
         let root = parse(less);
 
         expect(root.first.selector).to.eql('.browser-prefix(@prop, @args)');
@@ -99,6 +99,7 @@ describe('LESS Parser', () => {
         expect(root.first.first.value).to.eql('@{baz}');
     });
 
+    /* eslint no-warning-comments: 0 */
     // TODO: mixin parameters
 
 });
