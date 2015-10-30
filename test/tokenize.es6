@@ -1,4 +1,4 @@
-import tokenize from '../lib/scss-tokenize';
+import tokenize from '../lib/less-tokenize';
 
 import { expect } from 'chai';
 import   Input    from 'postcss/lib/input';
@@ -7,7 +7,7 @@ let test = (css, tokens) => {
     expect(tokenize(new Input(css))).to.eql(tokens);
 };
 
-describe('SCSS Tokenizer', () => {
+describe('LESS Tokenizer', () => {
 
     it('tokenizes inine comments', () => {
         test('// a\n', [ ['comment', '// a', 1, 1, 1, 4, 'inline'],

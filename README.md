@@ -1,21 +1,21 @@
 # PostCSS LESS Syntax [![Build Status][ci-img]][ci]
 
-> Built from [postcss-scss](https://github.com/postcss/postcss-scss) SCSS Parser.
+> Built from the [postcss-less](https://github.com/postcss/postcss-less) SCSS Syntax Parser.
 
 <img align="right" width="95" height="95"
      title="Philosopher’s stone, logo of PostCSS"
      src="http://postcss.github.io/postcss/logo.svg">
 
-A [SCSS] parser for [PostCSS].
+A [LESS] parser for [PostCSS].
 
 **This module does not compile SCSS.** It simply parses mixins as custom
 at-rules & variables as properties, so that PostCSS plugins can then transform
 SCSS source code alongside CSS.
 
 [PostCSS]: https://github.com/postcss/postcss
-[ci-img]:  https://img.shields.io/travis/postcss/postcss-scss.svg
-[LESS]:    http://lesscss.org
-[ci]:      https://travis-ci.org/postcss/postcss-scss
+[ci-img]:  https://img.shields.io/travis/postcss/postcss-less.svg
+[LESS]:    http://lesless.org
+[ci]:      https://travis-ci.org/postcss/postcss-less
 
 <a href="https://evilmartians.com/?utm_source=postcss">
 <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg" alt="Sponsored by Evil Martians" width="236" height="54">
@@ -44,7 +44,7 @@ postcss(plugins).process(less, { syntax: syntax }).then(function (result) {
 
 This module also enables parsing of single-line comments in CSS source code.
 
-```scss
+```less
 :root {
     // Main theme color
     --color: red;

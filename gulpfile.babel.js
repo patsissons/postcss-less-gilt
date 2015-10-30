@@ -27,7 +27,7 @@ gulp.task('build:package', ['clean'], () => {
     let editor = require('gulp-json-editor');
     gulp.src('./package.json')
         .pipe(editor( (p) => {
-            p.main = 'lib/scss-syntax';
+            p.main = 'lib/less-syntax';
             p.devDependencies['babel-core'] = p.dependencies['babel-core'];
             delete p.dependencies['babel-core'];
             return p;
@@ -59,10 +59,10 @@ gulp.task('integration', (done) => {
     require('babel-core/register')({ extensions: ['.es6'], ignore: false });
     let postcss = require('postcss');
     let real    = require('postcss-parser-tests/real');
-    let scss    = require('./');
+    let less    = require('./');
     real(done, (css) => {
         return postcss().process(css, {
-            parser: scss,
+            parser: less,
             map:    { annotation: false }
         });
     });

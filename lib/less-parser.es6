@@ -1,12 +1,12 @@
 import Comment from 'postcss/lib/comment';
 import Parser  from 'postcss/lib/parser';
 
-import scssTokenizer from './scss-tokenize';
+import lessTokenizer from './less-tokenize';
 
-export default class ScssParser extends Parser {
+export default class LessParser extends Parser {
 
     tokenize() {
-        this.tokens = scssTokenizer(this.input);
+        this.tokens = lessTokenizer(this.input);
     }
 
     comment(token) {

@@ -1,9 +1,9 @@
-import parse from '../lib/scss-parse';
+import parse from '../lib/less-parse';
 
 import { expect } from 'chai';
 import   cases    from 'postcss-parser-tests';
 
-describe('SCSS Parser', () => {
+describe('LESS Parser', () => {
 
     cases.each( (name, css, json) => {
         it('parses ' + name, () => {

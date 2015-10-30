@@ -20,7 +20,7 @@ const RE_AT_END         = /[ \n\t\r\{\(\)'"\\;/]/g;
 const RE_WORD_END       = /[ \n\t\r\(\)\{\}:;@!'"\\#]|\/(?=\*)/g;
 const RE_BAD_BRACKET    = /.[\\\/\("'\n]/;
 
-export default function scssTokenize(input) {
+export default function lessTokenize(input) {
     let tokens = [];
     let css    = input.css.valueOf();
 

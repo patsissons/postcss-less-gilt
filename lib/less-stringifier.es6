@@ -1,6 +1,6 @@
 import Stringifier from 'postcss/lib/stringifier';
 
-export default class ScssStringifier extends Stringifier {
+export default class LessStringifier extends Stringifier {
 
     comment(node) {
         let left  = this.raw(node, 'left',  'commentLeft');
