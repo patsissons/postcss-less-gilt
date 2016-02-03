@@ -1,4 +1,6 @@
-# PostCSS LESS Syntax [![Build Status][ci-img]][ci]
+# PostCSS LESS Syntax - Work in Progress
+
+> This project is not stable and is in development. If you'd like to contribute, please submit a Pull Request.
 
 > Built from the [postcss-less](https://github.com/postcss/postcss-less) SCSS Syntax Parser.
 
