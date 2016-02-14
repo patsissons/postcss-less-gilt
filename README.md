@@ -2,7 +2,7 @@
 
 > This project is not stable and is in development. If you'd like to contribute, please submit a Pull Request.
 
-> Built from the [postcss-less](https://github.com/postcss/postcss-less) SCSS Syntax Parser.
+> Built from the [postcss-scss](https://github.com/postcss/postcss-scss) SCSS Syntax Parser.
 
 <img align="right" width="95" height="95"
      title="Philosopher’s stone, logo of PostCSS"
@@ -12,7 +12,7 @@ A [LESS] parser for [PostCSS].
 
 **This module does not compile SCSS.** It simply parses mixins as custom
 at-rules & variables as properties, so that PostCSS plugins can then transform
-SCSS source code alongside CSS.
+LESS source code alongside CSS.
 
 [PostCSS]: https://github.com/postcss/postcss
 [ci-img]:  https://img.shields.io/travis/postcss/postcss-less.svg
@@ -25,12 +25,12 @@ SCSS source code alongside CSS.
 
 ## Usage
 
-### SCSS Transformations
+### LESS Transformations
 
 The main use case of this plugin is to apply PostCSS transformations directly
-to SCSS source code. For example, if you ship a theme written in SCSS and need
+to LESS source code. For example, if you ship a theme written in LESS and need
 [Autoprefixer] to add the appropriate vendor prefixes to it; or you need to
-lint SCSS with a plugin such as [Stylelint].
+lint LESS with a plugin such as [Stylelint].
 
 ```js
 var syntax = require('postcss-less');
