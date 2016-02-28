@@ -36,7 +36,7 @@ export default class LessParser extends Parser {
         node.raws.right = match[3];
       }
     } else {
-      super(token);
+      super.comment(token);
     }
   }
 
@@ -47,7 +47,7 @@ export default class LessParser extends Parser {
   // };
 
   rule (token) {
-    super(token);
+    super.rule(token);
 
     if (RE_MIXIN_DEF.test(this.current.source.input.css)) {
       // this.current is the 'rule' node created in super.rule()
