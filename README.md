@@ -1,27 +1,34 @@
 # PostCSS LESS Syntax - Work in Progress
 
+[PostCSS]: https://github.com/postcss/postcss
+[PostCSS-SCSS]: https://github.com/postcss/postcss-scss
+[LESS]: http://lesless.org
+[Autoprefixer]: https://github.com/postcss/autoprefixer
+[Stylelint]: http://stylelint.io/
+
+[ci]: https://travis-ci.org/postcss/postcss-less
+[ci-img]: https://img.shields.io/travis/postcss/postcss-less.svg?branch=master
+[npm]: https://www.npmjs.com/package/postcss-less
+[npm-dls]: https://img.shields.io/npm/dt/postcss-less.svg
+[npm-license]: https://img.shields.io/npm/l/postcss-less.svg
+
 > This project is not stable and is in development. If you'd like to contribute, please submit a Pull Request.
 
-> Built from the [postcss-scss](https://github.com/postcss/postcss-scss) SCSS Syntax Parser.
+> Built from the [postcss-scss]([PostCSS-SCSS]) SCSS Syntax Parser.
 
 <img align="right" width="95" height="95"
      title="Philosopher’s stone, logo of PostCSS"
      src="http://postcss.github.io/postcss/logo.svg">
 
+[![Build Status]([ci-img])]([ci])
+[![Downloads]([npm-dls])]([npm])
+[![License]([npm-license])]([npm])
+
 A [LESS] parser for [PostCSS].
 
-**This module does not compile SCSS.** It simply parses mixins as custom
+**This module does not compile LESS.** It simply parses mixins as custom
 at-rules & variables as properties, so that PostCSS plugins can then transform
 LESS source code alongside CSS.
-
-[PostCSS]: https://github.com/postcss/postcss
-[ci-img]:  https://img.shields.io/travis/postcss/postcss-less.svg
-[LESS]:    http://lesless.org
-[ci]:      https://travis-ci.org/postcss/postcss-less
-
-<a href="https://evilmartians.com/?utm_source=postcss">
-<img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg" alt="Sponsored by Evil Martians" width="236" height="54">
-</a>
 
 ## Usage
 
@@ -38,9 +45,6 @@ postcss(plugins).process(less, { syntax: syntax }).then(function (result) {
     result.content // LESS with transformations
 });
 ```
-
-[Autoprefixer]: https://github.com/postcss/autoprefixer
-[Stylelint]:    http://stylelint.io/
 
 ### Inline Comments for PostCSS
 
