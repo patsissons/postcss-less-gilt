@@ -20,7 +20,7 @@ describe('stringify', () => {
         result += i;
       });
 
-      expect(result).to.eql(css);
+      expect(result).to.equal(css);
     });
   });
 
@@ -32,7 +32,7 @@ describe('stringify', () => {
       result += i;
     });
 
-    expect(result).to.eql('// comment\na {}');
+    expect(result).to.equal('// comment\na {}');
   });
 
   it('stringifies inline comment in the end of file', () => {
@@ -43,6 +43,6 @@ describe('stringify', () => {
       result += i;
     });
 
-    expect(result).to.eql('// comment');
+    expect(result).to.equal('// comment');
   });
 });
