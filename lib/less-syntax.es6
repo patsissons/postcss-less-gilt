@@ -1,4 +1,4 @@
 import stringify from './less-stringify';
-import parse     from './less-parse';
+import parse from './less-parse';
 
 export default { parse, stringify };
