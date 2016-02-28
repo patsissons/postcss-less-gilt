@@ -23,19 +23,19 @@ const RE_BAD_BRACKET    = /.[\\\/\("'\n]/;
 /* eslint-enable no-multi-spaces */
 
 export default function lessTokenize (input) {
-  let tokens = [];
-  let css = input.css.valueOf();
+  const tokens = [];
+  const css = input.css.valueOf();
 
   let code, next, quote, lines, last, content, escape,
     nextLine, nextOffset, escaped, escapePos, prev, n;
 
-  let length = css.length;
+  const { length } = css;
   let offset = -1;
   let line = 1;
   let pos = 0;
 
   function unclosed (what) {
-    throw input.error('Unclosed ' + what, line, pos - offset);
+    throw input.error(`Unclosed ${what}`, line, pos - offset);
   }
 
   while (pos < length) {
