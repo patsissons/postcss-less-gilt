@@ -13,7 +13,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gilt/postcss-less.git"
+    "url": "https://github.com/patsissons/postcss-less.git"
   },
   "dependencies": {
     "postcss": "^5.0.10"
