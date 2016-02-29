@@ -70,14 +70,14 @@ gulp.task('build:all', ['build:lib', 'build:test']);
 gulp.task('build:lib', ['clean:lib'], () => {
   return gulp
     .src(path.join(config.dirs.lib, '*.es6'))
-    .pipe(babel())
+    .pipe(babel({ presets: ['es2015'] }))
     .pipe(gulp.dest(path.join(config.dirs.build, config.builds.lib)));
 });
 
 gulp.task('build:test', ['clean:test', 'build:lib'], () => {
   return gulp
     .src(path.join(config.dirs.test, '*.es6'))
-    .pipe(babel())
+    .pipe(babel({ presets: ['es2015'] }))
     .pipe(gulp.dest(path.join(config.dirs.build, config.builds.test)));
 });
 
