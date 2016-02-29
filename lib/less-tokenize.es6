@@ -1,3 +1,5 @@
+import 'es6-shim';
+
 /* eslint-disable no-multi-spaces */
 const SINGLE_QUOTE      =  39; // `''
 const DOUBLE_QUOTE      =  34; // `"'
