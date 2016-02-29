@@ -6,12 +6,6 @@
 [Autoprefixer]: https://github.com/postcss/autoprefixer
 [Stylelint]: http://stylelint.io/
 
-[ci]: https://travis-ci.org/postcss/postcss-less
-[ci-img]: https://img.shields.io/travis/postcss/postcss-less.svg?branch=master
-[npm]: https://www.npmjs.com/package/postcss-less
-[npm-dls]: https://img.shields.io/npm/dt/postcss-less.svg
-[npm-license]: https://img.shields.io/npm/l/postcss-less.svg
-
 > This project is not stable and is in development. If you'd like to contribute, please submit a Pull Request.
 
 > Built from the [postcss-scss]([PostCSS-SCSS]) SCSS Syntax Parser.
@@ -20,9 +14,9 @@
      title="Philosopher’s stone, logo of PostCSS"
      src="http://postcss.github.io/postcss/logo.svg">
 
-[![Build Status]([ci-img])]([ci])
-[![Downloads]([npm-dls])]([npm])
-[![License]([npm-license])]([npm])
+[![Build Status](https://img.shields.io/travis/patsissons/postcss-less.svg?branch=develop)](https://travis-ci.org/patsissons/postcss-less)
+[![Downloads](https://img.shields.io/npm/dt/postcss-less.svg)](https://www.npmjs.com/package/postcss-less)
+[![License](https://img.shields.io/npm/l/postcss-less.svg)](https://www.npmjs.com/package/postcss-less)
 
 A [LESS] parser for [PostCSS].
 
