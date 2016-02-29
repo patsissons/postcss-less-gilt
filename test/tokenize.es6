@@ -28,4 +28,12 @@ describe('LESS Tokenizer', () => {
       ['word', '@{a\nb}', 1, 1, 2, 2]
     ]);
   });
+
+  it('tokenizes @ in a string in parens', () => {
+    test('("a@b")', [
+      ['(', '(', 1, 1],
+      ['string', '"a@b"', 1, 2, 1, 6],
+      [')', ')', 1, 7]
+    ]);
+  });
 });
