@@ -7,7 +7,7 @@ import real from 'postcss-parser-tests/real';
 import register from 'babel-core/register';
 
 import gulp from 'gulp';
-import clean from 'gulp-clean';
+import clean from 'gulp-rimraf';
 import eslint from 'gulp-eslint';
 import babel from 'gulp-babel';
 import mocha from 'gulp-mocha';
