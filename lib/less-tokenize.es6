@@ -125,8 +125,9 @@ export default function lessTokenize (input) {
           content = css.slice(pos, next + 1);
           let badBracket = RE_BAD_BRACKET.test(content);
           let foundParam = content.indexOf('@') >= 0;
+          let foundString = /['"]/.test(content);
 
-          if (!content.length || content === '...' || foundParam) {
+          if (!content.length || content === '...' || (foundParam && !foundString)) {
             // we're dealing with a mixin param block
             if (next === -1 || badBracket) {
               unclosed('bracket');
