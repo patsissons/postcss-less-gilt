@@ -1,17 +1,14 @@
 /* global __dirname */
 
-// import fs from 'fs';
 import path from 'path';
 import postcss from 'postcss';
 import real from 'postcss-parser-tests/real';
-import register from 'babel-core/register';
 
 import gulp from 'gulp';
 import clean from 'gulp-rimraf';
 import eslint from 'gulp-eslint';
 import babel from 'gulp-babel';
 import mocha from 'gulp-mocha';
-// import jsonEditor from 'gulp-json-editor';
 
 const config = {
   dirs: {
@@ -21,8 +18,6 @@ const config = {
   },
   builds: {
     lib: 'lib',
-    docs: 'docs',
-    package: 'package'
   },
   test: {
     reporter: 'spec'
@@ -75,30 +70,6 @@ gulp.task('build:lib', ['clean:lib'], () => {
     .pipe(gulp.dest(path.join(config.dirs.build, config.builds.lib)));
 });
 
-gulp.task('build:docs', ['clean:docs'], () => {
-  // let ignore = fs
-  //   .readFileSync(path.join(__dirname, '.npmignore'))
-  //   .toString()
-  //   .trim()
-  //   .split(/(\r?\n)+/)
-  //   .concat(['.npmignore', 'package.json', 'index.js'])
-  //   .map(i => `!${i}`);
-
-  // return gulp
-  //   .src(['*'].concat(ignore))
-  //   .pipe(gulp.dest(config.dirs.build));
-});
-
-gulp.task('build:package', ['clean:package'], () => {
-  // gulp
-  //   .src(path.join(__dirname, 'package.json'))
-  //   .pipe(jsonEditor(p => {
-  //     p.main = 'lib/less-syntax';
-  //     p.devDependencies['babel-core'] = p.dependencies['babel-core'];
-  //     delete p.dependencies['babel-core'];
-  //     return p;
-  //   }))
-  //   .pipe(gulp.dest('build'));
 });
 
 // Lint
