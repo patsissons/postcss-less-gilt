@@ -9,15 +9,19 @@ import clean from 'gulp-rimraf';
 import eslint from 'gulp-eslint';
 import babel from 'gulp-babel';
 import mocha from 'gulp-mocha';
+import uglify from 'gulp-uglify';
+import rename from 'gulp-rename';
 
 const config = {
   dirs: {
     lib: path.join(__dirname, 'lib'),
     test: path.join(__dirname, 'test'),
-    build: path.join(__dirname, 'build')
+    build: path.join(__dirname, 'build'),
+    dist: path.join(__dirname, 'dist')
   },
   builds: {
     lib: 'lib',
+    test: 'test'
   },
   test: {
     reporter: 'spec'
@@ -34,7 +38,7 @@ gulp.task('config', () => {
 
 gulp.task('clean', ['clean:all']);
 
-gulp.task('clean:all', ['clean:lib', 'clean:docs', 'clean:package'], () => {
+gulp.task('clean:all', ['clean:lib', 'clean:test', 'clean:dist'], () => {
   return gulp
     .src(config.dirs.build, { read: false })
     .pipe(clean());
@@ -46,22 +50,22 @@ gulp.task('clean:lib', () => {
     .pipe(clean());
 });
 
-gulp.task('clean:docs', () => {
+gulp.task('clean:test', () => {
   return gulp
-    .src(path.join(config.dirs.build, config.builds.docs), { read: false })
+    .src(path.join(config.dirs.build, config.builds.test), { read: false })
     .pipe(clean());
 });
 
-gulp.task('clean:package', () => {
+gulp.task('clean:dist', () => {
   return gulp
-    .src(path.join(config.dirs.build, config.builds.package), { read: false })
+    .src(path.join(config.dirs.dist), { read: false })
     .pipe(clean());
 });
 
 // Build
 
 gulp.task('build', ['build:all']);
-gulp.task('build:all', ['build:lib', 'build:docs', 'build:package']);
+gulp.task('build:all', ['build:lib', 'build:test']);
 
 gulp.task('build:lib', ['clean:lib'], () => {
   return gulp
@@ -70,6 +74,11 @@ gulp.task('build:lib', ['clean:lib'], () => {
     .pipe(gulp.dest(path.join(config.dirs.build, config.builds.lib)));
 });
 
+gulp.task('build:test', ['clean:test', 'build:lib'], () => {
+  return gulp
+    .src(path.join(config.dirs.test, '*.es6'))
+    .pipe(babel())
+    .pipe(gulp.dest(path.join(config.dirs.build, config.builds.test)));
 });
 
 // Lint
@@ -106,17 +115,14 @@ gulp.task('test', ['lint', 'test:run']);
 
 gulp.task('test:all', ['lint', 'test:run', 'test:integration']);
 
-gulp.task('test:run', () => {
-  register({ extensions: ['.es6'], ignore: false });
-
+gulp.task('test:run', ['build:test'], () => {
   return gulp
-    .src(path.join(config.dirs.test, '**', '*.es6'), { read: false })
+    .src(path.join(config.dirs.build, config.builds.test, '**', '*.js'), { read: false })
     .pipe(mocha({ reporter: config.test.reporter }));
 });
 
-gulp.task('test:integration', (done) => {
-  register({ extensions: ['.es6'], ignore: false });
-  let less = require('./index.js').default;
+gulp.task('test:integration', ['build:lib'], (done) => {
+  let less = require('./build/lib/less-syntax').default;
 
   real(done, (css) => {
     return postcss()
@@ -145,4 +151,18 @@ gulp.task('watch:test', ['test:run'], () => {
       path.join(config.dirs.lib, '**', '*.es6'),
       path.join(config.dirs.test, '**', '*.es6')
     ], ['test:run']);
+});
+
+// Dist
+
+gulp.task('dist', ['build:lib'], () => {
+  gulp
+    .src(path.join(config.dirs.build, config.builds.lib, '**', '*.js'))
+    .pipe(gulp.dest(config.dirs.dist));
+
+  gulp
+    .src(path.join(config.dirs.build, config.builds.lib, '**', '*.js'))
+    .pipe(uglify())
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(gulp.dest(config.dirs.dist));
 });
