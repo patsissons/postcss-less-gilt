@@ -69,14 +69,14 @@ gulp.task('build:all', ['build:lib', 'build:test']);
 
 gulp.task('build:lib', ['clean:lib'], () => {
   return gulp
-    .src(path.join(config.dirs.lib, '*.es6'))
+    .src(path.join(config.dirs.lib, '*.js'))
     .pipe(babel({ presets: ['es2015'] }))
     .pipe(gulp.dest(path.join(config.dirs.build, config.builds.lib)));
 });
 
 gulp.task('build:test', ['clean:test', 'build:lib'], () => {
   return gulp
-    .src(path.join(config.dirs.test, '*.es6'))
+    .src(path.join(config.dirs.test, '*.js'))
     .pipe(babel({ presets: ['es2015'] }))
     .pipe(gulp.dest(path.join(config.dirs.build, config.builds.test)));
 });
@@ -95,7 +95,7 @@ gulp.task('lint:all', ['lint:lib', 'lint:test'], () => {
 
 gulp.task('lint:lib', () => {
   return gulp
-    .src(path.join(config.dirs.lib, '**', '*.es6'))
+    .src(path.join(config.dirs.lib, '**', '*.js'))
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
@@ -103,7 +103,7 @@ gulp.task('lint:lib', () => {
 
 gulp.task('lint:test', () => {
   return gulp
-    .src(path.join(config.dirs.test, '**', '*.es6'))
+    .src(path.join(config.dirs.test, '**', '*.js'))
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
@@ -140,16 +140,16 @@ gulp.task('watch', ['watch:test']);
 gulp.task('watch:lint', ['lint'], () => {
   return gulp
     .watch([
-      path.join(config.dirs.lib, '**', '*.es6'),
-      path.join(config.dirs.test, '**', '*.es6')
+      path.join(config.dirs.lib, '**', '*.js'),
+      path.join(config.dirs.test, '**', '*.js')
     ], ['lint']);
 });
 
 gulp.task('watch:test', ['test:run'], () => {
   return gulp
     .watch([
-      path.join(config.dirs.lib, '**', '*.es6'),
-      path.join(config.dirs.test, '**', '*.es6')
+      path.join(config.dirs.lib, '**', '*.js'),
+      path.join(config.dirs.test, '**', '*.js')
     ], ['test:run']);
 });
 
