@@ -118,7 +118,8 @@ gulp.task('test:all', ['lint', 'test:run', 'test:integration']);
 gulp.task('test:run', ['build:test'], () => {
   return gulp
     .src(path.join(config.dirs.build, config.builds.test, '**', '*.js'), { read: false })
-    .pipe(mocha({ reporter: config.test.reporter }));
+    .pipe(mocha({ reporter: config.test.reporter }))
+    .on('error', function () { this.emit('end'); });
 });
 
 gulp.task('test:integration', ['build:lib'], (done) => {
