@@ -10,6 +10,15 @@ function testTokens (css, tokens) {
 };
 
 describe('#tokenize()', () => {
+  it('tokenizes basic css', () => {
+    testTokens('a {}', [
+      ['word', 'a', 1, 1, 1, 1],
+      ['space', ' '],
+      ['{', '{', 1, 3],
+      ['}', '}', 1, 4]
+    ]);
+  });
+
   describe('Comments', () => {
     it('tokenizes inline comments', () => {
       testTokens('// a\n', [
