@@ -17,12 +17,18 @@
 [![Build Status](https://img.shields.io/travis/patsissons/postcss-less.svg?branch=develop)](https://travis-ci.org/patsissons/postcss-less)
 [![Downloads](https://img.shields.io/npm/dt/postcss-less.svg)](https://www.npmjs.com/package/postcss-less)
 [![License](https://img.shields.io/npm/l/postcss-less.svg)](https://www.npmjs.com/package/postcss-less)
+[![License](https://img.shields.io/npm/v/postcss-less.svg)](https://www.npmjs.com/package/postcss-less)
 
 A [LESS] parser for [PostCSS].
 
 **This module does not compile LESS.** It simply parses mixins as custom
 at-rules & variables as properties, so that PostCSS plugins can then transform
 LESS source code alongside CSS.
+
+## Use Cases
+
+* lint your LESS code with a plugin such as [Stylelint](http://stylelint.io/).
+* apply PostCSS transformations (such as [Autoprefixer](https://github.com/postcss/autoprefixer)) directly to the LESS source code
 
 ## Usage
 
@@ -34,8 +40,8 @@ to LESS source code. For example, if you ship a theme written in LESS and need
 lint LESS with a plugin such as [Stylelint].
 
 ```js
-var syntax = require('postcss-less');
-postcss(plugins).process(less, { syntax: syntax }).then(function (result) {
+const syntax = require('postcss-less');
+postcss(plugins).process(lessText, { syntax: syntax }).then(function (result) {
     result.content // LESS with transformations
 });
 ```
@@ -54,9 +60,12 @@ This module also enables parsing of single-line comments in CSS source code.
 Note that you don't need a special stringifier to handle the output; the default
 one will automatically convert single line comments into block comments.
 
-```js
-var syntax = require('postcss-less');
-postcss(plugins).process(less, { parser: syntax }).then(function (result) {
-    result.css // CSS with normal comments
-});
-```
+## Restrictions
+
+### Skipped blocks:
+* nested mixins with custom token `nested-mixin`
+* nested &:extend(); with custom token `nested-extend`
+
+## Attribution
+
+Current module is based on the work of [postcss-scss](https://github.com/postcss/postcss-scss) library and includes the `LESS` parser efforts of [github:gilt/postcss-less](https://github.com/gilt/postcss-less) and [github:webschik/postcss-less](https://github.com/webschik/postcss-less)
