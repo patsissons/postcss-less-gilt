@@ -19,6 +19,16 @@ describe('#tokenize()', () => {
     ]);
   });
 
+  it('tokenizes variables', () => {
+    testTokens('@var: 1;', [
+      ['word', '@var', 1, 1, 1, 4],
+      [':', ':', 1, 5],
+      ['space', ' '],
+      ['word', '1', 1, 7, 1, 7],
+      [';', ';', 1, 8]
+    ]);
+  });
+
   it('tokenizes mixins', () => {
     testTokens('.foo (@bar; @baz...) { border: @{baz}; }', [
       ['word', '.foo', 1, 1, 1, 4],
