@@ -87,28 +87,27 @@ gulp.task('build:test', ['clean:test', 'build:lib'], () => {
 
 gulp.task('lint', ['lint:all']);
 
-gulp.task('lint:all', ['lint:lib', 'lint:test'], () => {
-  return gulp
-    .src(path.join(__dirname, '*.js'))
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
-});
+gulp.task('lint:all', ['lint:lib', 'lint:test', 'lint:root']);
 
 gulp.task('lint:lib', () => {
   return gulp
     .src(path.join(config.dirs.lib, '**', '*.js'))
     .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+    .pipe(eslint.format());
 });
 
 gulp.task('lint:test', () => {
   return gulp
     .src(path.join(config.dirs.test, '**', '*.js'))
     .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+    .pipe(eslint.format());
+});
+
+gulp.task('lint:root', () => {
+  return gulp
+    .src(path.join(__dirname, '*.js'))
+    .pipe(eslint())
+    .pipe(eslint.format());
 });
 
 // Test
@@ -144,7 +143,8 @@ gulp.task('watch:lint', ['lint'], () => {
   return gulp
     .watch([
       path.join(config.dirs.lib, '**', '*.js'),
-      path.join(config.dirs.test, '**', '*.js')
+      path.join(config.dirs.test, '**', '*.js'),
+      path.join(__dirname, '*.js')
     ], ['lint']);
 });
 
