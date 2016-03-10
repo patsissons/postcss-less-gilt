@@ -38,11 +38,7 @@ gulp.task('config', () => {
 
 gulp.task('clean', ['clean:all']);
 
-gulp.task('clean:all', ['clean:lib', 'clean:test', 'clean:dist'], () => {
-  return gulp
-    .src(config.dirs.build, { read: false })
-    .pipe(clean());
-});
+gulp.task('clean:all', ['clean:build', 'clean:dist']);
 
 gulp.task('clean:lib', () => {
   return gulp
@@ -53,6 +49,12 @@ gulp.task('clean:lib', () => {
 gulp.task('clean:test', () => {
   return gulp
     .src(path.join(config.dirs.build, config.builds.test), { read: false })
+    .pipe(clean());
+});
+
+gulp.task('clean:build', () => {
+  return gulp
+    .src(config.dirs.build, { read: false })
     .pipe(clean());
 });
 
