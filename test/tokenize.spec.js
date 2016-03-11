@@ -19,6 +19,26 @@ describe('#tokenize()', () => {
     ]);
   });
 
+  it('tokenizes css hash colors', () => {
+    testTokens('a { border: 1px solid #c0c0c0; }', [
+      ['word', 'a', 1, 1, 1, 1],
+      ['space', ' '],
+      ['{', '{', 1, 3],
+      ['space', ' '],
+      ['word', 'border', 1, 5, 1, 10],
+      [':', ':', 1, 11],
+      ['space', ' '],
+      ['word', '1px', 1, 13, 1, 15],
+      ['space', ' '],
+      ['word', 'solid', 1, 17, 1, 21],
+      ['space', ' '],
+      ['word', '#c0c0c0', 1, 23, 1, 29],
+      [';', ';', 1, 30],
+      ['space', ' '],
+      ['}', '}', 1, 32]
+    ]);
+  });
+
   it('tokenizes variables', () => {
     testTokens('@var: 1;', [
       ['word', '@var', 1, 1, 1, 4],
