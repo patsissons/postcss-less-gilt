@@ -58,6 +58,24 @@ describe('#tokenize()', () => {
     ]);
   });
 
+  it('tokenizes unpadded fractional numbers', () => {
+    testTokens('a { transition: all .2s; }', [
+      ['word', 'a', 1, 1, 1, 1],
+      ['space', ' '],
+      ['{', '{', 1, 3],
+      ['space', ' '],
+      ['word', 'transition', 1, 5, 1, 14],
+      [':', ':', 1, 15],
+      ['space', ' '],
+      ['word', 'all', 1, 17, 1, 19],
+      ['space', ' '],
+      ['word', '.2s', 1, 21, 1, 23],
+      [';', ';', 1, 24],
+      ['space', ' '],
+      ['}', '}', 1, 26]
+    ]);
+  });
+
   it('tokenizes variables', () => {
     testTokens('@var: 1;', [
       ['word', '@var', 1, 1, 1, 4],
