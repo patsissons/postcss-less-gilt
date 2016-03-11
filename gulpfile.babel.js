@@ -135,6 +135,27 @@ gulp.task('test:integration', ['build:lib'], (done) => {
   });
 });
 
+gulp.task('test:integration:local', ['build:lib'], () => {
+  let less = require('./build/lib/less-syntax').default;
+  let through = require('through');
+
+  // create file in root source directory called integration.css to process
+
+  return gulp
+    .src(path.join(__dirname, 'integration.css'))
+    .pipe(through(function (file) {
+      try {
+        postcss().process(file.contents.toString(), {
+          parser: less,
+          map: { annotation: false }
+        }).css;
+        console.log('VALID');
+      } catch (e) {
+        console.log('ERROR', e.message, e.stack);
+      }
+    }));
+});
+
 // Watch
 
 gulp.task('watch', ['watch:test']);
