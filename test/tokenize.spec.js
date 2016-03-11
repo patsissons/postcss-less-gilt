@@ -6,6 +6,7 @@ import { expect } from 'chai';
 import Input from 'postcss/lib/input';
 
 function testTokens (css, tokens) {
+  // console.log(tokenize(new Input(css)));
   expect(tokenize(new Input(css))).to.eql(tokens);
 };
 
