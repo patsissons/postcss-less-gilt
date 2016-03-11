@@ -1,3 +1,9 @@
+## 0.3.0
+* Merged in webschik's changes
+* cleanup of various files (license, readme, gulp file)
+* added a number of new tests to capture integration failures
+* resolved remaining integration failures
+
 ## 0.2.0
 * Cleanup of source and build files (eslint standards)
 * fixing issue with @ inside of a string in parens
