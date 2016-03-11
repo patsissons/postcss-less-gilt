@@ -77,6 +77,26 @@ describe('#tokenize()', () => {
     ]);
   });
 
+  it('tokenizes the css sibling seletor with a quoted string following', () => {
+    testTokens('.a ~ .b { content: ~  "a"; }', [
+      ['word', '.a', 1, 1, 1, 2],
+      ['space', ' '],
+      ['word', '~', 1, 4, 1, 4],
+      ['space', ' '],
+      ['word', '.b', 1, 6, 1, 7],
+      ['space', ' '],
+      ['{', '{', 1, 9],
+      ['space', ' '],
+      ['word', 'content', 1, 11, 1, 17],
+      [':', ':', 1, 18],
+      ['space', ' '],
+      ['word', '~  "a"', 1, 20, 1, 25],
+      [';', ';', 1, 26],
+      ['space', ' '],
+      ['}', '}', 1, 28]
+    ]);
+  });
+
   it('tokenizes variables', () => {
     testTokens('@var: 1;', [
       ['word', '@var', 1, 1, 1, 4],
