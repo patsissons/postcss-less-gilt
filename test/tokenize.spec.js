@@ -39,6 +39,25 @@ describe('#tokenize()', () => {
     ]);
   });
 
+  it('tokenizes multiple comma separated values without a space in between', () => {
+    testTokens('a { font-family: serif, sans-serif; }', [
+      ['word', 'a', 1, 1, 1, 1],
+      ['space', ' '],
+      ['{', '{', 1, 3],
+      ['space', ' '],
+      ['word', 'font-family', 1, 5, 1, 15],
+      [':', ':', 1, 16],
+      ['space', ' '],
+      ['word', 'serif', 1, 18, 1, 22],
+      ['word', ',', 1, 23, 1, 24],
+      ['space', ' '],
+      ['word', 'sans-serif', 1, 25, 1, 34],
+      [';', ';', 1, 35],
+      ['space', ' '],
+      ['}', '}', 1, 37]
+    ]);
+  });
+
   it('tokenizes variables', () => {
     testTokens('@var: 1;', [
       ['word', '@var', 1, 1, 1, 4],
